@@ -1,0 +1,45 @@
+{% include "base.html" %}
+
+{% block content %}
+
+<h1> Admin Panel</h1>
+
+{% for section, values in data.items() %}
+<div class="section">
+
+    <h2>{{section}}</h2>
+    <table>
+        
+        <tr> 
+            <th></th>
+            {% if values['price_header'] %}
+                {% for h in values['price_header'] %}
+                    <th>{{ h }}</th>
+                {% endfor %}
+            {% else %}
+                <th>Price</th>
+            {% endif %}
+        </tr>
+        
+        {% for item in values['items']%}
+        <form action="{{ url_for('update_item') }}" method="post">
+            <input type="hidden", name="section", value="{{section}}">
+            <tr>
+                {% for k in item.keys() if item[k] %}
+                    {% if k == 'item_name' %}
+                        <td><input type="text", name="item_name", value="{{ item[k] }}"></td>
+                    {% elif k == 'second_text' %}
+                        <td class="alt_text"> <input type="text", name="second_text", value="{{ item[k] }}"></td>
+                    {% else %}
+                    <td class="price"><input type="text", name="{{ k }}", value="{{ item[k] }}"></td>
+                    {% endif %}
+                {% endfor %}
+                <td><input type="submit"></td>
+            </tr>
+        </form>
+        {% endfor %}
+    </table>
+</div>
+{% endfor %}
+
+{% endblock %}

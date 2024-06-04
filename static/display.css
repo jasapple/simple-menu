@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #707070;
+    width:90%px;
+    border:1px red solid;
+    padding-left:2%;
+    padding-right:2%;
+}
+
+h1 {
+    color: #000000;
+    text-align: center;
+    padding: 0;
+}
+
+.section {
+    background-color: #0000ff;
+    display: inline-block;
+    text-align: justify;
+}
+
+.section h2 {
+    text-align: center;
+}
+
+div table{
+    display:inline-block;
+    border:1px yellow solid;
+    text-align: justify;
+}
+body:after {
+    display:inline-block;
+    width:100%;
+    content:'';
+}
+
+td.alt_text {
+    color: #05481f;
+}
+
+td.price {
+    text-align: center;
+}

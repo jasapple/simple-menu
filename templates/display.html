@@ -1,0 +1,52 @@
+<!doctype html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='display.css') }}">
+</head>
+<body>
+    <h1>Welcome to Krauszers!</h1>
+
+    {% if debug == True %}
+        {{data}}
+    {% endif %}
+
+    {% for section, values in data.items() %}
+        <div class="section">
+
+            <h2>{{section.title()}}</h2>
+
+            <table>
+                <!-- Table Header -->
+                <tr> 
+                    <th></th>
+                    {% if values['price_header'] %}
+                        {% for h in values['price_header'] %}
+                            <th>{{h}}</th>
+                        {% endfor %}
+                    {% else %}
+                        <th>Price</th>
+                    {% endif %}
+                </tr>
+                
+                <!-- Table Contents -->
+                {% for item in values['items']%}
+                    <tr>
+                        {% for k in item.keys() if item[k] %}
+                            {% if k == 'item_name' %}
+                                <td>{{ item[k] }}</td>
+                            {% elif k == 'second_text' %}
+                                <td class="alt_text"> {{item[k]}}</td>
+                            {% elif item[k] == " " %}
+                                <td></td>
+                            {% else %}
+                            <td class="price">${{item[k]}}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+            </table>
+        </div> <!-- Section Div -->
+    {% endfor %}
+
+    
+</body>

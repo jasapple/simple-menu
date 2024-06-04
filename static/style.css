@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #707070;
+}
+
+.section {
+    background-color: #0000ff;
+    display: block;
+    padding-bottom: .5%;
+}
+
+div table{
+    border:1px yellow solid;
+}
+
+td.alt_text {
+    color: #05481f;
+}
+
+td.price {
+    text-align: center;
+}

@@ -41,4 +41,29 @@ From here, I tweaked a few things for styling and filled in some gaps to make ev
 
 
 ## Beta 1
-Styling
+
+#### Styling
+
+I focused on some styling and making sure all admin subpages worked consistently. Additionally I wanted to make sure the admin pages worked well on mobile devices for easy updating of the contents.
+
+
+## V0.1
+
+I wanted to move configurable parameters to a config file along with being able to change the display's appearance and making the application ready for production environments.
+
+#### Display Appearance
+
+I was originally using hex values for color codes in the CSS file. I wanted to be able to pass the values from a configuration file and so I set many color options directly in the `display.html` `style` section rather then the `style.css` since I can pass the values from flask. For safety, I also make sure the always provide a `default()` value for any color overrides. While doing this, I wanted to adjust the table's alt color programmatically. This proved harder then I expected and I ended up leaving this as a configurable option to leave the user more control.
+
+I later decided to change the global 'settings options', such as legal text and store name, into a settings dict for better portability.
+
+#### WSGI - Gunicorn
+
+I needed to utilize a WSGI for deployment. I used ChatGPT to help set this up.
+
+While troubleshooting, gunicorn was unable to launch the app. After some time I found that using argparse in the `wsgi.py` file was preventing parameters from being passed to gunicorn properly. I switched to using ENV files and a default value which rectified these errors and I was able to launch the app via gunicorn
+
+#### Refresh
+
+I added a simple javascript entry to refresh the display page once a minute b default but made this configurable.
+

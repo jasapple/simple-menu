@@ -1,6 +1,8 @@
 :root {
     --text-size: 42px;
-    --text-color: #fff;
+    
+    /* Overridden is Jinja Template */
+    /* --text-color: rgb(255, 255, 255); */
 }
 
 * {
@@ -29,13 +31,13 @@ body {
 h1 {
     text-align: center;
     padding: 0;
-    color: #000;
     margin: -20px auto 0 auto;
     width: fit-content;
     font-size: 45px;
 
     /* Overridden is Jinja Template */
     /* background-color: #ff0000; */
+    /* color: #000; */
 
 }
 
@@ -62,15 +64,16 @@ hr {
 }
 
 .section h2 {
-    color: var(--text-color);
-    text-shadow: 1px 1px #000000;
+    /* color: var(--text-color);
+    text-shadow: 1px 1px #000000; */
     text-align: center;
     font-size: var(--text-size);
     background-color: #ffff00;
 }
 
 .section_description {
-    color: var(--text-color);
+    /* Overridden is Jinja Template */
+    /* color: var(--text-color); */
     text-shadow: 1px 1px #000000;
     margin-top: 5px;
     text-align: center;
@@ -81,8 +84,10 @@ hr {
 
 table{
     /* border:1px yellow solid; */
+
+    /* Overridden is Jinja Template */
+    /* color: var(--text-color); */
     text-align: left;
-    color: var(--text-color);
     text-shadow: 1px 1px #000000;
     border-spacing: 0;
     width: 100%;
@@ -118,10 +123,6 @@ td {
     padding-left: 10px;
     padding-right: 10px;
 }
-
-tr:nth-child(even) {
-    background-color: #a30000;
-  }
 
 .strikethrough {
     text-decoration: line-through;

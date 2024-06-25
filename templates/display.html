@@ -2,19 +2,51 @@
 <html>
 <head>
     <link rel="stylesheet" href="{{ url_for('static', filename='display.css') }}">
-
     <style>
-        body {
-            background-color: {{ background | default('#ff0000')}} ;
+        :root {
+            --text-color: {{ style.text_color | default('255,255,255')}};
+            --background-color: {{ style.background_color | default('68,68,68')}};
+            --background-color-table: {{ style.background_color_table | default('44,44,44')}};
+            --header-color: {{ style.header_color | default('0,0,0')}};
         }
+
+        body {
+            background-color: rgb(var(--background-color)) ;
+        }
+
         h1 {
-            background-color: {{ background | default('#ff0000')}} ;
+            background-color: rgb(var(--background-color)) ;
+            color: rgb(var(--header-color))
+        }
+
+        .section h2 {
+            color: rgb(var(--header-color))
+        }
+
+        tr:nth-child(even) {
+            background-color: rgb(var(--background-color-table));
+        }
+
+        .section_description {
+            color: rgb(var(--text-color));
+        }
+
+        table {
+            color: rgb(var(--text-color));
         }
     </style>
+
+    <script>
+        // Refresh the page every N seconds
+        setTimeout(function(){
+            window.location.reload(1);
+        }, {{ settings.refresh_time | default(60000) }});
+    </script>
 </head>
+
 <body>
     <hr/>
-    <h1>Welcome to Krauszers!</h1>
+    <h1>Welcome{% if settings.store_name %} to {{settings.store_name}}{% endif %}</h1>
 
     <div class="section_body">
         {% for section in sections %}
@@ -74,7 +106,7 @@
     </div> <!-- Section body-->
 
     <div class="disclaimer">
-        <p>{{ disclaimer }}</p>
+        <p>{{ settings.legal_disclaimer }}</p>
     </div>
 
 </body>

@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Edit Price{% endblock %}
+    
+{% block content %}
+
+    <div class="header">
+        <a href="{{ url_for('admin') }}">Admin Page</a>
+        <a href="{{ url_for('edit_item', item_id=item.id) }}">{{ item.name }}</a>
+    </div>
+
+    <h2>Edit Prices for <div class="item_name">{{ item.name }}</div></h2>
+
+    <div class="section">
+
+        <table>
+            <tr>
+                <th>Price Label</th>
+                <th>Price</th>
+                <th></th>
+            </tr>
+            {% for price in item.prices %}
+            <tr>
+                    <form action="{{ url_for('edit_price', item_id=item.id) }}" method="POST">
+                        <input type="hidden" name="price_id" value="{{ price.id }}">
+                        <td><input type="text" name="price_label" value="{{ price.label }}"></td>
+                        <td><input type="number" name="price_amount" value="{{ price.amount }}" step="0.01"></td>
+                        <td><input type="submit" value="Update"></td>
+                    </form>
+                    <td>
+                    <form action="{{ url_for('delete_price', price_id=price.id) }}" method="POST"">
+                        <input type="submit" value="Delete">
+                    </form>
+                    </td>
+            </tr>
+            {% endfor %}
+
+
+            <form action="{{ url_for('edit_price', item_id=item.id) }}" method="POST">
+                <tr>
+                    <td><input type="text" id="price_label" name="price_label" required></td>
+                    <td><input type="number" id="price_amount" name="price_amount" step="0.01" required></td>
+                    <td><input type="submit" value="Add Price"></td>
+                </tr>
+            </form>
+    </div>
+
+{% endblock %}

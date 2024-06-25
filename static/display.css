@@ -1,46 +1,143 @@
+:root {
+    --text-size: 42px;
+    --text-color: #fff;
+}
+
 * {
     margin: 0;
     padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
+
 body {
-    background-color: #707070;
-    width:90%px;
-    border:1px red solid;
+    width:90%;
+    margin: auto;
     padding-left:2%;
     padding-right:2%;
+
+    /* Overridden is Jinja Template */
+    /* background-color: #ff0000; */
+}
+
+.section_body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 h1 {
-    color: #000000;
     text-align: center;
     padding: 0;
+    color: #000;
+    margin: -20px auto 0 auto;
+    width: fit-content;
+    font-size: 45px;
+
+    /* Overridden is Jinja Template */
+    /* background-color: #ff0000; */
+
 }
 
+hr {
+    height: 2px;
+    color: #578daf;
+    background-color: #578daf;
+    border: 0;
+    padding: 0; 
+    margin: 20px 0 0 0;
+}
+
+.disabled {
+    display: none;
+    
+}
 .section {
-    background-color: #0000ff;
-    display: inline-block;
-    text-align: justify;
+    justify-content: space-between;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    border: 1px #ffffff solid;
+    max-width: 30%;
+    width: 30%;
 }
 
 .section h2 {
+    color: var(--text-color);
+    text-shadow: 1px 1px #000000;
     text-align: center;
+    font-size: var(--text-size);
+    background-color: #ffff00;
 }
 
-div table{
-    display:inline-block;
-    border:1px yellow solid;
-    text-align: justify;
+.section_description {
+    color: var(--text-color);
+    text-shadow: 1px 1px #000000;
+    margin-top: 5px;
+    text-align: center;
+    font-style: italic;
+    font-size: calc(var(--text-size) - 10px);
+    white-space:pre 
 }
+
+table{
+    /* border:1px yellow solid; */
+    text-align: left;
+    color: var(--text-color);
+    text-shadow: 1px 1px #000000;
+    border-spacing: 0;
+    width: 100%;
+}
+
+tbody {
+    width: 100%;
+}
+
 body:after {
     display:inline-block;
     width:100%;
     content:'';
 }
 
-td.alt_text {
-    color: #05481f;
+th {
+    text-align: center;
+    white-space: nowrap;
+}
+
+.price_label {
+    text-decoration: underline;
+    font-size: calc(var(--text-size) - 2px);
+    padding-right: 5px;
 }
 
 td.price {
     text-align: center;
+}
+
+td {
+    font-size: var(--text-size);
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: #a30000;
+  }
+
+.strikethrough {
+    text-decoration: line-through;
+    opacity: 80%;
+}
+
+.item_description {
+    opacity: 80%;
+    font-size: calc(var(--text-size) - 10px);
+}
+
+.disclaimer {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin-bottom: 1em;
+    margin-right: 1em;
+    font-size: calc(var(--text-size) - 20px);
 }

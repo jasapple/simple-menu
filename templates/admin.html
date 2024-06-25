@@ -1,45 +1,90 @@
-{% include "base.html" %}
+{% extends "base.html" %}
 
+{% block title %}Admin Page{% endblock %}
+    
 {% block content %}
 
-<h1> Admin Panel</h1>
+    <h1>Admin Page</h1>
+   
+    <div class="section">
+        <h2>Edit Sections</h2>
 
-{% for section, values in data.items() %}
-<div class="section">
+        <table>
+            {% for section in sections %}
+                <tr>
+                    <td><a href="{{ url_for('edit_section', section_id=section.id) }}">{{ section.name }}</a></td>
+                </tr>
+            {% endfor %}
+        </table>
 
-    <h2>{{section}}</h2>
-    <table>
+        <table>
+            <caption>Add New Section</caption>
+            <form action="{{ url_for('admin') }}" method="POST">
+                <tbody>
+                <tr>
+                    <th>Section Name</th>
+                    <td><input type="text" id="section_name" name="section_name" required></td>
+                </tr>
+
+                <tr>
+                    <th>Description</th>
+                    <td><textarea id="section_description" name="section_description" rows="3"></textarea></td>
+                </tr>
+
+                <tr>
+                    <th></th>
+                    <td><input type="submit" value="Add Section"></td>
+                </tr>
+                </tbody>
+
+            </form>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>Edit Items</h2>
         
-        <tr> 
-            <th></th>
-            {% if values['price_header'] %}
-                {% for h in values['price_header'] %}
-                    <th>{{ h }}</th>
-                {% endfor %}
-            {% else %}
-                <th>Price</th>
-            {% endif %}
-        </tr>
-        
-        {% for item in values['items']%}
-        <form action="{{ url_for('update_item') }}" method="post">
-            <input type="hidden", name="section", value="{{section}}">
+        {% for section in sections %}
+            <table>
             <tr>
-                {% for k in item.keys() if item[k] %}
-                    {% if k == 'item_name' %}
-                        <td><input type="text", name="item_name", value="{{ item[k] }}"></td>
-                    {% elif k == 'second_text' %}
-                        <td class="alt_text"> <input type="text", name="second_text", value="{{ item[k] }}"></td>
-                    {% else %}
-                    <td class="price"><input type="text", name="{{ k }}", value="{{ item[k] }}"></td>
-                    {% endif %}
-                {% endfor %}
-                <td><input type="submit"></td>
+                <th>{{ section.name }}</th>
             </tr>
-        </form>
+            <tbody>
+                    {% for item in section.items %}
+                    <tr>
+                        <td>
+                        <div class="{% if not item.available %}strikethrough{% endif %}">
+                        <a href="{{ url_for('edit_item', item_id=item.id) }}">{{ item.name }}</a>
+                        </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </tbody>
+
+            </table>
+        <br>
         {% endfor %}
-    </table>
-</div>
-{% endfor %}
+
+        <form action="{{ url_for('admin') }}" method="POST">
+            <table>
+                <tr>
+                    <th>New Item Name</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                <tbody>
+                <tr>
+                    <td><input type="text" id="item_name" name="item_name" required></td>
+                    <td><select id="section_id" name="section_id" required>
+                        {% for section in sections %}
+                        <option value="{{ section.id }}">{{ section.name }}</option>
+                        {% endfor %}
+                    </select></td>
+                    <td><input type="submit" value="Add Item"></td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
 
 {% endblock %}

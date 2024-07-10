@@ -1,0 +1,14 @@
+[Unit]
+Description=Gunicorn instance to serve the Simple Menu Flask Application
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt/simple-menu
+Environment="PATH=/usr/local/bin;/usr/bin, CONFIG_PATH=$WorkingDirectory/config.ini"
+ExecStart=/usr/local/bin/gunicorn -c gunicorn_config.py wsgi:app 
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target
